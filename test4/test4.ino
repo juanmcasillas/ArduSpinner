@@ -10,15 +10,18 @@ The circuit:
 #include <MD_REncoder.h>
 #include <Mouse.h>
 
+// DT 2
+// CLK 3
 
 // set up encoder object
 MD_REncoder R = MD_REncoder(2, 3);
 
-#define ENABLE_HALF_STEP 1
+#define ENABLE_HALF_STEP 0
 #define ENABLE_SPEED 1 
-#define DEFAULT_PERIOD 200
+#define DEFAULT_PERIOD 50
 
-int xpos = 0;
+#define SCALE 1
+
 void setup() 
 {
   Serial.begin(57600);
@@ -35,7 +38,9 @@ void loop()
   {
     //Serial.print(x == DIR_CW ? "\n+1" : "\n-1");
     int speed = R.speed();
-    xpos += (x == DIR_CW ? speed : -1 * speed);
-    Mouse.move(xpos,0,0);
+    speed = (speed < 1 ? 1 : speed);
+    int xpos = (x == DIR_CW ?  speed : -1 * speed);
+    
+    Mouse.move(xpos * SCALE ,0,0);
   }
 }
