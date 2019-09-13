@@ -13,3 +13,7 @@ https://github.com/MPParsley/ch340g-ch34g-ch34x-mac-os-x-driver trying this, doe
 
 On windows OK, on mac, doesn't shown the serial ports for these device.
 
+Only works with my rewritten version of ClickEncoder.
+MAME Options (Defaults) (Arkanoid II)
+DIAL Digital Speed = 15
+DIAL Sensivity = 70
