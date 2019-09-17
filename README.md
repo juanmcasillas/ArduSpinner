@@ -176,7 +176,7 @@ This library is required in order to work, so you can install it from the Arduin
 
 I modify the library to reset the Acceleration when the direction changes, and tuned the acceleration values for my application, so you need to copy it to the Arduino `libraries` folder (Usually in your `Documents` folder). Just copy the `encoder` directory.
 
-[ClickEncoder](https://github.com/0xPIT/encoder)
+[ClickEncoder](https://github.com/juanmcasillas/encoder)
 
 ### ArduSpinner
 
