@@ -32,6 +32,7 @@ This project provides:
         2. [ClickEncoder](#clickencoder)
         3. [ArduSpinner](#arduspinner)
     3. [Tests](#tests)
+    4. [Binary](#binary)
     4. [Mame](#mame)
 
 # Project Features
@@ -66,12 +67,60 @@ To build `ArduSpinner` you need the following things:
 There are 4 parts that you have to print. I use a Ender-3 Pro with Marlin Firwmare, and PLA, and get good results.
 I use CURA for slicing with the following major configuration settings:
 
-* Layer Height: 0.2mm
-* Wall Thickness: 0.2mm
-* Enable support: All
-* 
+
+|Variable                                        |Value    |
+|------------------------------------------------|--------:|
+|Layer Height| 0.21|
+|Initial Layer Height| 0.32|
+|Wall Thickness| 0.88|
+|Wall Line count| 3|
+|Top/Bottom Thickness| 0.92|
+|top Thickness| 0.92|
+|Top Layers| 5|
+|bottom Thickness| 0.92|
+|bottom Layers| 5|
+|Top/Bottom pattern| lines|
+|Horizontal expansion| 0|
+|Infill density| 60%|
+|Infill pattern| grid|
+|Printing temperature| 190|
+|Printing temperature initial layer| 195|
+|Build plate temperature| 55|
+|Build plate temperature initial layer| 75|
+|Initial Layer flow| 100|
+|Enable retraction| Checked|
+|Retraction Distance| 6.5|
+|Retraction Speed| 50|
+|Print Speed| 50|
+|Infill Speed| 50|
+|Wall speed| 25|
+|Top/Bottom speed| 25|
+|Travel Speed| 150|
+|Initial Layer Print Speed| 15|
+|Initial Layer Travel Speed| 30|
+|Combing mode| All|
+|Avoid Supports when travelling| checked|
+|Z Hop when retracted| checked|
+|Enable Print cooling| checked|
+|Fan Speed| 100|
+|Initial Fan Speed| 0|
+|Regular Fan Speed at Height| 0.72|
+|Regular Fan Speed at Layer| 3|
+|Generate Support| Checked|
+|Support Placement| Everywhere|
+|Support Overhang Angle| 47|
+|Support Pattern| ZigZag|
+|Support Density| 20|
+|Support Z Distance| 0.2|
+|Suport X/Y Distance| 0.88|
+|User Towers| unchecked|
+|Build plate adhesion type| None|
+|Surface mode| Normal|
+|Enable Bridge Settings| Checked|
+
 
 This table resumes the printing times for my Ender-3 configuration:
+
 
 |part name       |cuantity|color|printing time|
 |----------------|--------|-----|------------:|
@@ -196,6 +245,18 @@ In `dev/` folder you could find some tests. They are created to test some functi
 * `test5` [ClickEncoder](https://github.com/0xPIT/encoder) Library test. Requires also *TimerOne* library
 * `test6` My test implementation with interrupts.
 
+
+## Binary
+
+I provide the compiled version for the sketch:
+
+* `arduspinner/arduspinner.ino.leonardo.hex`
+* `arduspinner/arduspinner.ino.with_bootloader.leonardo.hex`
+
+You can put the file directly in the arduino using for example [avrdude](https://stackoverflow.com/questions/45646127/how-to-upload-a-hex-file-into-an-arduino-leonardo-using-avrdude-from-the-command) or [Arduino Builder](https://forum.arduino.cc/index.php?topic=151774.0)
+the process is fairly complex and you can brick the arduino. I recommend you to build and flash using the ide istead, but.
+
+
 ## MAME
 
 There is a minimum configuration in `mame.ini` file. Just change `keyboard` to `mouse` for `dial_device`. Save
@@ -220,3 +281,4 @@ Only works with my rewritten version of ClickEncoder.
 MAME Options (Defaults) (Arkanoid II)
 DIAL Digital Speed = 15
 DIAL Sensivity = 70
+
