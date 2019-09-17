@@ -1,10 +1,14 @@
 # ArduSpinner
 
+
+
 A simple dial (aka spinner) input control using arduino and a rotary encoder. The dial is shown
 in the computer as a mouse with X movement. The movement has been tuned to be "accelerated" so
 if you do small movements, you have precision, but if you move it kickly, it runs faster. Use
 a modified version of [ClickEncoder](https://github.com/0xPIT/encoder) library. See below for
 more details.
+
+<a href="https://youtu.be/IPjfnaJqFXc">Demo video on YouTube</a>
 
 This project provides:
 
@@ -64,7 +68,8 @@ To build `ArduSpinner` you need the following things:
 
 # 3D Printing and assembly
 
-There are 4 parts that you have to print. I use a Ender-3 Pro with Marlin Firwmare, and PLA, and get good results.
+There are 4 parts that you have to print. The STL are ready positioned in the "right" way to be printed, so just
+print them as is. I use a Ender-3 Pro with Marlin Firwmare, and PLA, and get good results.
 I use CURA for slicing with the following major configuration settings:
 
 
@@ -118,16 +123,17 @@ I use CURA for slicing with the following major configuration settings:
 |Surface mode| Normal|
 |Enable Bridge Settings| Checked|
 
+<br>
 
 This table resumes the printing times for my Ender-3 configuration:
 
 
-|part name       |cuantity|color|printing time|
-|----------------|--------|-----|------------:|
-|wheel           |1       |black|        03:35|
-|chassis         |1       |green|        00:31|
-|arduino holder  |1       |green|        00:08|
-|spacers         |2       |green|        00:03|
+|part name       |cuantity|color|printing time hh:mm|
+|----------------|--------|-----|------------------:|
+|wheel           |1       |black|              03:35|
+|chassis         |1       |green|              00:31|
+|arduino holder  |1       |green|              00:08|
+|spacers         |2       |green|              00:03|
 
 (I print the wheel in black, alone, and the rest of them in green, all together)
 
@@ -135,23 +141,43 @@ This table resumes the printing times for my Ender-3 configuration:
 
 ### Wheel
 
+* [STL]("stl/wheel.stl")
+* [Thingiverse](https://www.thingiverse.com/thing:3866147)
+
 <img src="img/wheel_flat.jpg" width="800px"/>
 <img src="img/wheel_side.jpg" width="800px"/>
 
 ### Chassis
+
+* [STL]("stl/chassis.stl")
+* [Thingiverse](https://www.thingiverse.com/thing:3866148)
 
 <img src="img/chassis.jpg" width="800px"/>
 <img src="img/chassis_and_encoder.jpg" width="800px"/>
 
 ### Arduino Holder
 
+* [STL]("stl/arduino_holder.stl")
+* [Thingiverse](https://www.thingiverse.com/thing:3866149)
+
 <img src="img/chassis_and_holder.jpg" width="800px"/>
 
 ### Spacers
 
+* [STL]("stl/spacers.stl")
+* [Thingiverse](https://www.thingiverse.com/thing:3866151)
+
 <img src="img/spacers.jpg" width="800px"/>
 
 ## Assembly
+
+It's very easy: I recommend you to [wire](#wiring) it first:
+
+1. Put the encoder with the connectors as shown in the first photo, and screw the nut tight.
+2. Put the spaces between the arduino holder and the back of the encoder, and screw then. Yo get something like a sandwitch (second photo). This allows to create some force between the rod and the back of the encoder.
+3. Put the wheel in the rod. Check that the chanfer inside the wheel fits the chanfer in the encoder's rod. Push to the end and you get arduspinner mounted.
+4. Press the arduino inside the arduino holder, if you want to mount it there.
+
 
 <img src="img/parts_name.jpg" width="800px"/>
 <img src="img/chassis_and_holder_name.jpg" width="800px"/>
@@ -196,6 +222,8 @@ encoder comes with some *detents* so you get feedback when rotate it. To play, i
 |`SW`          |`D4`       |white     |Not used, so not connected|
 |`DT`          |`D2`       |grey      |Digital Interrupt PIN     |
 |`CLK`         |`D3`       |pink      |Digital Interrupt PIN     |
+
+<img src="img/wiring.png" with="800px">
 
 # Software
 
@@ -254,13 +282,13 @@ I provide the compiled version for the sketch:
 * `arduspinner/arduspinner.ino.with_bootloader.leonardo.hex`
 
 You can put the file directly in the arduino using for example [avrdude](https://stackoverflow.com/questions/45646127/how-to-upload-a-hex-file-into-an-arduino-leonardo-using-avrdude-from-the-command) or [Arduino Builder](https://forum.arduino.cc/index.php?topic=151774.0)
-the process is fairly complex and you can brick the arduino. I recommend you to build and flash using the ide istead, but.
+the process is fairly complex and you can brick the arduino. I recommend you to build and flash using the ide istead, but if you want to try, you're welcome.
 
 
 ## MAME
 
 There is a minimum configuration in `mame.ini` file. Just change `keyboard` to `mouse` for `dial_device`. Save
-and play.
+and play. The MAME options for Analog input are set as default (I don't change them). Enjoy!
 
 ```
 #
@@ -272,13 +300,11 @@ dial_device mouse
 <img src="img/mame_ini.jpg" with="800px">
 
 
-https://github.com/adrianmihalko/ch340g-ch34g-ch34x-mac-os-x-driver DONT WORK
-https://github.com/MPParsley/ch340g-ch34g-ch34x-mac-os-x-driver trying this, doesn't work
+As a side note, if you run your arcade in windows 7 and you want that Windows doesn't start never in recovery mode,
+log into windows, and launch a `cmd` as administrator. then run this:
 
-On windows OK, on mac, doesn't shown the serial ports for these device.
-
-Only works with my rewritten version of ClickEncoder.
-MAME Options (Defaults) (Arkanoid II)
-DIAL Digital Speed = 15
-DIAL Sensivity = 70
+```
+% bcdebit /set {default} recoveryenabled No
+% bcdebit /set {default} bootstatuspolicy IgnoreAllFailures
+```
 
