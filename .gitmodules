@@ -1,0 +1,3 @@
+[submodule "encoder"]
+	path = encoder
+	url = https://github.com/0xPIT/encoder.git

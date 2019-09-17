@@ -1,11 +1,16 @@
+/////////////////////////////////////////////////////////////////////////////
+//
+// ArduSpinner.ino
+// (c) Juan M. Casillas 2019
+// Implements a Dial (aka spinner) input control as Mouse input (X Axis)
+//
+/////////////////////////////////////////////////////////////////////////////
 
-//#define ENC_DECODER (1 << 2)
 #define WITHOUT_BUTTON 1
 
 #include <ClickEncoder.h>
-#include <TimerOne.h>
 #include <Mouse.h>
-
+#include <TimerOne.h>
 
 #define TIMER1_INTERVAL 1000
 #define PIN_A 2
@@ -18,76 +23,34 @@ int16_t last, value;
 int16_t sign_value;
 int16_t abs_value;
 
-void timerIsr()
-{
-  encoder->service();
+void timerIsr() {
+    encoder->service();
 }
 
-void setup()
-{
-  encoder = new ClickEncoder(PIN_A, PIN_B, PIN_BUTTON, 1);
-  encoder->setAccelerationEnabled(true);
-  Timer1.initialize(TIMER1_INTERVAL);
-  Timer1.attachInterrupt(timerIsr);
-  last = -1;
-  value = 0;
-  Mouse.begin();
+void setup() {
+    encoder = new ClickEncoder(PIN_A, PIN_B, PIN_BUTTON, 1);
+    encoder->setAccelerationEnabled(true);
+    Timer1.initialize(TIMER1_INTERVAL);
+    Timer1.attachInterrupt(timerIsr);
+    last = -1;
+    value = 0;
+    Mouse.begin();
 #ifndef RELEASE
-  Serial.begin(115200);
-  Serial.println("Arduspinner Started");
+    Serial.begin(115200);
+    Serial.println("Arduspinner Started");
 #endif
 }
 
-void loop()
-{
-  //
-  // use deltas
-  // value += encoder->getValue();
-  value = encoder->getValue();
+void loop() {
+    value = encoder->getValue();
 
-  if (value != 0)
-  {
-    last = value;
-
-    /*
-    abs_value = abs(value);
-    sign_value = (value >= 0 ? 1 : -1);
-
-    if (abs_value < 10) {
-      abs_value = abs_value + ceil(pow(abs_value, 1.5));
-    }
-
-    value = sign_value * abs_value;
-    Serial.print(" * ");
-    Serial.println(value);
-    */
-    Mouse.move(value, 0, 0);
+    if (value != 0) {
+        last = value;
+        Mouse.move(value, 0, 0);
 
 #ifndef RELEASE
-    Serial.print("Encoder Value: ");
-    Serial.println(value);
+        Serial.print("Encoder Value: ");
+        Serial.println(value);
 #endif
-
-  }
-
-  // don't use the button feature for now, only for reset in DEBUG
-  /* 
-  ClickEncoder::Button b = encoder->getButton();
-  if (b != ClickEncoder::Open) {
-     switch (b) {
-      case ClickEncoder::Clicked:
-        value = 0;
-        break;
-      case ClickEncoder::Pressed:
-      case ClickEncoder::Held:
-      case ClickEncoder::Released:
-      case ClickEncoder::DoubleClicked:
-          //Serial.println("ClickEncoder::DoubleClicked");
-          //encoder->setAccelerationEnabled(!encoder->getAccelerationEnabled());
-          //Serial.print("  Acceleration is ");
-          //Serial.println((encoder->getAccelerationEnabled()) ? "enabled" : "disabled");
-        break;
     }
-  }    
-  */
 }
