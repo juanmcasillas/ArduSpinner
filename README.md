@@ -37,7 +37,8 @@ This project provides:
         3. [ArduSpinner](#arduspinner)
     3. [Tests](#tests)
     4. [Binary](#binary)
-    4. [Mame](#mame)
+    5. [Mame](#mame)
+    6. [Two Encoders](#two-encoders)
 
 # Project Features
 
@@ -308,3 +309,12 @@ log into windows, and launch a `cmd` as administrator. then run this:
 % bcdebit /set {default} bootstatuspolicy IgnoreAllFailures
 ```
 
+
+## Two Encoders
+
+Andy ask me about how to manage two encoders at same time. At first I think it was pretty straightforward, but there was a sightly internal "bug" in the [ClickEncoder](https://github.com/0xPIT/encoder) with the 
+default constructor, and `WITHOUT_BUTTON` macro. I think there's some problem when you initializate two object of the same type with this macro (the debug shows that in the second one, the Y encoder, it doesn't
+honor the macro def) So I fix the Constructor in my forked version [ClickEncoder](https://github.com/juanmcasillas/encoder) and add the `WITHOUT_BUTTON` macro in the `.h` file. You can test two encoders (e.g. for
+X, Y management using [arduspinnerXY](https://github.com/juanmcasillas/ArduSpinner/blob/master/arduspinnerXY/arduspinnerXY.ino) sketch. In the image below you can see an example wiring for two encoders.
+
+<img src="img/two_encoders.jpg" with="800px">
