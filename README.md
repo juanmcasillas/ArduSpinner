@@ -17,28 +17,31 @@ This project provides:
 
 # Table Of Contents
 
-1. [Project Features](#project-features)
-2. [Part List](#part-list)
-3. [3D Printing and Assembly](#3d-printing-and-assembly)
-    1. [Parts](#parts)
-        1. [Wheel](#wheel)
-        2. [Chassis](#chassis)
-        3. [Arduino Holder](#arduino-holder)
-        4. [Spacers](#spacers)
-    2. [Assembly](#assembly)
-    3. [Arcade Installation](#arcade-installation)
-2. [Electronics](#electronics)
-    1. [Encoder Mod](#encoder-mod)
-    2. [Wiring](#wiring)
-3. [Software](#software)
-    1. [Install](#install)
-        1. [TimerOne](#timerone)
-        2. [ClickEncoder](#clickencoder)
-        3. [ArduSpinner](#arduspinner)
-    3. [Tests](#tests)
-    4. [Binary](#binary)
-    5. [Mame](#mame)
-    6. [Two Encoders](#two-encoders)
+- [ArduSpinner](#arduspinner)
+- [Table Of Contents](#table-of-contents)
+- [Project Features](#project-features)
+- [Part List](#part-list)
+- [3D Printing and assembly](#3d-printing-and-assembly)
+  - [Parts](#parts)
+    - [Wheel](#wheel)
+    - [Chassis](#chassis)
+    - [Arduino Holder](#arduino-holder)
+    - [Spacers](#spacers)
+  - [Assembly](#assembly)
+  - [Arcade Installation](#arcade-installation)
+- [Electronics](#electronics)
+  - [Encoder Mod](#encoder-mod)
+  - [Wiring](#wiring)
+- [Software](#software)
+  - [Install](#install)
+    - [TimerOne](#timerone)
+    - [ClickEncoder](#clickencoder)
+    - [ArduSpinner](#arduspinner-1)
+    - [ArduspinnerButton](#arduspinnerbutton)
+  - [Tests](#tests)
+  - [Binary](#binary)
+  - [MAME](#mame)
+  - [Two Encoders](#two-encoders)
 
 # Project Features
 
@@ -263,6 +266,11 @@ Just select in the `Tools` Menu, `Boards` and check the `Leonardo`. Select the p
 
 Uncomment `//#define RELASE 1` if you want debug output to the Serial Monitor (at 115200 bauds)
 
+### ArduspinnerButton
+
+The same version as before, but uses the `PIN 4` (connected to `SW` pin in the rotary). The sketch reads the button, and
+If single click, sends a mouse click for the `LEFT` button. If double clicked, sends a mouse click for the `RIGHT` button.
+
 ## Tests
 
 In `dev/` folder you could find some tests. They are created to test some functionality. Just for reference.
@@ -273,6 +281,8 @@ In `dev/` folder you could find some tests. They are created to test some functi
 * `test4` [MD_REncoder](https://github.com/MajicDesigns/MD_REncoder/) library test. Works. Also includes mouse HID.
 * `test5` [ClickEncoder](https://github.com/0xPIT/encoder) Library test. Requires also *TimerOne* library
 * `test6` My test implementation with interrupts.
+
+
 
 
 ## Binary
