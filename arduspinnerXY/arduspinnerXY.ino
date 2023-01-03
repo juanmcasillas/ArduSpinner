@@ -8,8 +8,6 @@
 //
 /////////////////////////////////////////////////////////////////////////////
 
-#define WITHOUT_BUTTON 1
-
 #include <ClickEncoder.h>
 #include <Mouse.h>
 #include <TimerOne.h>
